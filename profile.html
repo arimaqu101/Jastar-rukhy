@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жеке Кабинет | HelpMap</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    </head>
+<body>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <h1><a href="index.html">HelpMap</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">Жоба туралы</a></li>
+                    <li><a href="index.html#features">Мүмкіндіктер</a></li>
+                    <li><a href="forum.html">Форум</a></li> 
+                    <li><a href="reviews.html">Пікірлер</a></li> 
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="index.html#news">Жаңалықтар</a></li>
+                    <li><a href="index.html#stats">Нәтижелер</a></li>
+                    <li><a href="index.html#map">Карта</a></li>
+                    <li><a href="index.html#contact">Байланыс</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="user-account">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="register.html" id="userLoginTrigger">Қонақ</a>
+                    <a href="profile.html" id="profileLink" style="display:none;"></a>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-container animate-on-scroll">
+        <div class="profile-header">
+            <i class="fas fa-user-circle profile-avatar"></i>
+            <h2 id="profileName">Жеке Кабинет: Қонақ</h2>
+            <p id="profileRole" style="font-size: 1.2rem; color: #17a2b8; font-weight: 700;">Рөл: Анықталмаған</p>
+        </div>
+
+        <div class="profile-info">
+            <strong>ID:</strong> <span id="profileID">N/A</span>
+            <strong>Email:</strong> <span id="profileEmail">user@example.com</span>
+            <strong>Тіркелген күні:</strong> <span id="profileJoinDate">2025-01-01</span>
+            <strong>Орналасқан жері:</strong> <span id="profileLocation">Алматы, Қазақстан</span>
+        </div>
+        
+        <section id="volunteerSection" class="profile-section" style="display:none;">
+            <h3><i class="fas fa-hand-holding-heart"></i> Ерікті Активтілігі</h3>
+            <div class="profile-info" style="grid-template-columns: 1fr 1fr;">
+                <strong>Аяқталған Істер:</strong> <span><span id="completedTasksCount">0</span></span>
+                <strong>Жалпы Рейтинг:</strong> <span>4.8/5</span>
+            </div>
+            
+            <h4>Ағымдағы Тапсырмалар:</h4>
+            <ul class="task-list" id="taskList">
+                <li class="task-item pending animate-on-scroll">
+                    <span>Қарт Қанат атаға азық-түлік жеткізу (ID: 005)</span>
+                    <span class="task-status pending">Күтуде</span>
+                </li>
+                <li class="task-item completed animate-on-scroll" style="transition-delay: 0.1s;">
+                    <span>Ауруханаға дәрі-дәрмек апару (ID: 003)</span>
+                    <span class="task-status completed">Аяқталды</span>
+                </li>
+                <li class="task-item pending animate-on-scroll" style="transition-delay: 0.2s;">
+                    <span>Балалар үйіндегі шараға көмек (ID: 010)</span>
+                    <span class="task-status pending">Күтуде</span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="helpSection" class="profile-section" style="display:none;">
+            <h3><i class="fas fa-search-location"></i> Сұраныстар Тарихы</h3>
+            <ul class="task-list" id="requestList">
+                <li class="task-item completed animate-on-scroll">
+                    <span>Үй тазалығына көмек сұранысы</span>
+                    <span class="task-status completed">Орындалды (Ерікті: Азамат)</span>
+                </li>
+                <li class="task-item pending animate-on-scroll" style="transition-delay: 0.1s;">
+                    <span>Дәріханадан дәрі әкелу</span>
+                    <span class="task-status pending">Сәйкестендірілуде...</span>
+                </li>
+            </ul>
+        </section>
+
+
+        <div class="profile-actions">
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Аккаунттан Шығу
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HelpMap (NeoCare командасы). Барлық құқықтар қорғалған.</p>
+            <p>Байланыс: info@helpmap.kz</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ===========================================
+            // 1. АНЫҚТАУ ЖӘНЕ ҚАУІПСІЗДІКТІ ТЕКСЕРУ
+            // ===========================================
+            const loggedInUser = localStorage.getItem('username');
+            const loggedInRole = localStorage.getItem('userRole'); 
+            const logoutBtn = document.getElementById('logoutBtn');
+            const profileNameElement = document.getElementById('profileName');
+            const profileRoleElement = document.getElementById('profileRole');
+            const profileID = document.getElementById('profileID');
+            const volunteerSection = document.getElementById('volunteerSection');
+            const helpSection = document.getElementById('helpSection');
+            const completedTasksCount = document.getElementById('completedTasksCount');
+            const body = document.body;
+            const modeToggle = document.getElementById('modeToggle');
+
+            // Егер қолданушы тіркелмесе, кіру бетіне жіберу
+            if (!loggedInUser) {
+                alert("Жеке кабинетті көру үшін тіркеліңіз немесе кіріңіз!");
+                setTimeout(() => {
+                    window.location.href = 'register.html';
+                }, 50);
+                return; 
+            }
+            
+            // ===========================================
+            // 2. ПРОФИЛЬ ДЕРЕКТЕРІН ЖҮКТЕУ
+            // ===========================================
+            profileNameElement.textContent = `Жеке Кабинет: ${loggedInUser}`;
+            profileID.textContent = Math.floor(Math.random() * 1000) + 100; // Жай рандом ID
+            profileEmail.textContent = `${loggedInUser.toLowerCase().replace(/\s/g, '.')}@helpmap.kz`;
+            profileJoinDate.textContent = '2025-' + (Math.floor(Math.random() * 11) + 1).toString().padStart(2, '0') + '-01';
+            
+            if (loggedInRole === 'volunteer') {
+                profileRoleElement.textContent = 'Рөл: Ерікті';
+                volunteerSection.style.display = 'block';
+                completedTasksCount.textContent = Math.floor(Math.random() * 10) + 5; // Жай рандом сан
+            } else if (loggedInRole === 'help') {
+                profileRoleElement.textContent = 'Рөл: Көмекке мұқтаж';
+                helpSection.style.display = 'block';
+            }
+
+
+            // =========================================
+            // 3. БАРЛЫҚ БЕТТЕРДЕ ҚОЛДАНЫЛҒАН ЛОГИКА
+            // =========================================
+            
+            // Логика Dark Mode (Осы жердегі және script.js-тегі логикалар қайталануы мүмкін, бірақ бұл код дұрыс)
+            const currentMode = localStorage.getItem('mode') || 'light';
+            if (currentMode === 'dark') {
+                body.classList.add('dark-mode');
+                modeToggle.innerHTML = '<i class="fas fa-sun"></i> Жарық Режим';
+            } else {
+                modeToggle.innerHTML = '<i class="fas fa-moon"></i> Қараңғы Режим';
+            }
+
+            modeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                let mode = 'light';
+                if (body.classList.contains('dark-mode')) {
+                    mode = 'dark';
+                    modeToggle.innerHTML = '<i class="fas fa-sun"></i> Жарық Режим';
+                } else {
+                    modeToggle.innerHTML = '<i class="fas fa-moon"></i> Қараңғы Режим';
+                }
+                localStorage.setItem('mode', mode);
+            });
+
+            // Логика кнопки Выход
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    localStorage.removeItem('username'); 
+                    localStorage.removeItem('userRole'); 
+                    alert('Сіз аккаунтыңыздан шықтыңыз.');
+                    window.location.href = 'index.html'; 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

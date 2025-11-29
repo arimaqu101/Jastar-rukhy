@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Еріктілер Платформасы - Басты Бет</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Jastar rukhy</h1>
+            
+            <nav>
+                <ul>
+                    <li class="active-nav"><a href="index.html">Басты Бет</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="reviews.html">Пікірлер</a></li>
+                    <li><a href="chat.html">Чат</a></li>
+                    <li><a href="#contact-section">Байланыс</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-controls">
+                <button id="modeToggle" class="mode-toggle-btn" title="Қараңғы/Жарық режимді ауыстыру">
+                    <i class="fas fa-moon"></i> Қараңғы Режим
+                </button>
+                
+                <div class="user-account">
+                    <a id="userLoginTrigger" href="register.html">Кіру/Тіркелу</a>
+                    <a id="profileLink" href="profile.html" style="display: none;"></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Қазақстанның Еріктілер Қозғалысы. Бірге Өзгеріс Жасайық.</h2>
+                <p>Елімізді жақсартуға үлес қосыңыз. Сіздің көмегіңіз күтілуде! Жобаларды таңдап, тіркеліңіз.</p>
+                <a id="registerBtn" href="register.html" class="main-btn">
+                    <i class="fas fa-hand-holding-heart"></i> Ерікті болып тіркелу
+                </a>
+                <button id="showDetailsBtn" class="main-btn" style="background: none; border: 2px solid #fff; margin-left: 20px;">
+                    Толығырақ...
+                </button>
+                <div id="fullDetails">
+                    <p>Біздің платформа еріктілер мен көмекке мұқтаж адамдарды/ұйымдарды біріктіреді. Сіз өзіңізге ыңғайлы уақытта және жерде әлеуметтік, экологиялық және білім беру жобаларына қатыса аласыз.</p>
+                </div>
+            </div>
+            <div class="hero-image-placeholder">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding animate-on-scroll">
+        <div class="container">
+            <h3>Неліктен Бізді Таңдау Керек?</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Жақын Жобалар</h4>
+                    <p>Өзіңіз тұратын аймақтағы өзекті еріктілік миссияларын бірден табыңыз.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Ресми Сертификат</h4>
+                    <p>Әрбір аяқталған жұмыс үшін тәжірибеңізді растайтын электронды сертификат беріледі.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <h4>Қауымдастық</h4>
+                    <p>Басқа еріктілермен байланысып, тәжірибе алмасу үшін арнайы форум мен чат бар.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-padding bg-light text-center animate-on-scroll">
+        <div class="container">
+            <h3>Біздің Жетістіктеріміз Сандармен</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="counter-value counter" data-target="28000">0</div>
+                    <div class="counter-label">Тіркелген Еріктілер</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-value counter" data-target="540">0</div>
+                    <div class="counter-label">Аяқталған Жобалар</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-value counter" data-target="450000">0</div>
+                    <div class="counter-label">Көмек Көрсетілген Сағат</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-value counter" data-target="15">0</div>
+                    <div class="counter-label">Қамтылған Қалалар</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding animate-on-scroll">
+        <div class="container">
+            <h3>Соңғы Жаңалықтар</h3>
+            <div class="carousel-container">
+                <button id="prevBtn" class="carousel-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="news-carousel-track">
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+1" alt="Жаңалық 1" class="news-image">
+                            <div class="news-content">
+                                <h4>Мектептерге Көмек: "Білім" Акциясы</h4>
+                                <p>Еріктілер ауыл мектептеріндегі кітапханаларды жаңартып, балаларға қосымша сабақтар өткізді.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+2" alt="Жаңалық 2" class="news-image">
+                            <div class="news-content">
+                                <h4>Экологиялық Марафон: "Таза Қазақстан"</h4>
+                                <p>500-ден астам ерікті қалалық саябақтарды қоқыстан тазарту бойынша іс-шараға қатысты.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+3" alt="Жаңалық 3" class="news-image">
+                            <div class="news-content">
+                                <h4>Жаңа Жоба: Қарттарға Қамқорлық</h4>
+                                <p>Қарт адамдарға азық-түлік жеткізіп, үй шаруашылығына көмектесу бағдарламасы іске қосылды.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+4" alt="Жаңалық 4" class="news-image">
+                            <div class="news-content">
+                                <h4>IT Волонтерлік</h4>
+                                <p>Жас IT мамандар шағын үкіметтік емес ұйымдарға тегін веб-сайттар құрып берді.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+5" alt="Жаңалық 5" class="news-image">
+                            <div class="news-content">
+                                <h4>Спорт және Салауатты Өмір</h4>
+                                <p>Еріктілер балалар үйінің тәрбиеленушілеріне спорттық іс-шаралар өткізді.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="https://via.placeholder.com/400x200?text=Жаңалық+6" alt="Жаңалық 6" class="news-image">
+                            <div class="news-content">
+                                <h4>Мүмкіндігі Шектеулі Жастар</h4>
+                                <p>Жастарға кәсіби дағдыларды үйрету бойынша онлайн-курстар басталды.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="nextBtn" class="carousel-nav-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="carousel-indicators">
+                </div>
+        </div>
+    </section>
+
+    <section class="partners-section section-padding bg-light animate-on-scroll">
+        <div class="container">
+            <h3>Біздің Сенімді Серіктестеріміз</h3>
+            <div class="partners-grid">
+                
+                <div class="partner-logo-btn" data-partner-id="partnerA">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>A-Қоры</span>
+                </div>
+
+                <div class="partner-logo-btn" data-partner-id="partnerB">
+                    <i class="fas fa-code"></i>
+                    <span>B-Техно</span>
+                </div>
+                
+                <div class="partner-logo-btn" data-partner-id="partnerC">
+                    <i class="fas fa-leaf"></i>
+                    <span>C-Green</span>
+                </div>
+
+                <div class="partner-logo-btn" data-partner-id="partnerD">
+                    <i class="fas fa-university"></i>
+                    <span>Университет</span>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-section" class="section-padding animate-on-scroll">
+        <div class="container">
+            <h3>Сұрақтарыңыз Бар ма? Бізге Жазыңыз!</h3>
+            <div class="contact-form">
+                <p class="text-center">Сұраныс қалдырыңыз, біздің жүйе сізді тиісті маманға бағыттайды.</p>
+                <form id="aiDemoForm">
+                    <div class="form-group">
+                        <label for="name">Аты-жөніңіз:</label>
+                        <input type="text" id="name" name="name" placeholder="Есіміңізді енгізіңіз" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestType">Сұраныс түрі:</label>
+                        <select id="requestType" name="requestType" required>
+                            <option value="">Таңдаңыз</option>
+                            <option value="Волонтерлікке тіркелу">Ерікті болып тіркелу</option>
+                            <option value="Көмек сұрау">Ұйымға/Адамға көмек сұрау</option>
+                            <option value="Серіктестік">Серіктестік ұсынысы</option>
+                            <option value="Басқа сұрақтар">Басқа сұрақтар</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Хабарлама:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Толық хабарламаңызды жазыңыз..." required></textarea>
+                    </div>
+                    <button type="submit" class="main-btn submit-btn">
+                        <i class="fas fa-paper-plane"></i> Жіберу
+                    </button>
+                    <p id="formMessage"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <h4>EriktiKZ</h4>
+                <p style="font-size: 0.9em; margin-top: 5px;">Қазақстанның Волонтерлік Платформасы</p>
+            </div>
+            <div class="social-links">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright" style="font-size: 0.8em; color: #ccc;">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған. Демо нұсқа.</p>
+        </div>
+    </footer>
+
+    <div id="partnerDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h4>Серіктес: <span id="partnerName"></span></h4>
+            <p id="partnerDescription"></p>
+            <a id="partnerLink" href="#" target="_blank" class="main-btn">Сайтқа өту</a>
+        </div>
+    </div>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

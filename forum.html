@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Қауымдастық Форумы | HelpMap</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    </head>
+<body>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <h1>HelpMap</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">Жоба туралы</a></li>
+                    <li><a href="index.html#features">Мүмкіндіктер</a></li>
+                    <li class="active-nav"><a href="forum.html">Форум</a></li> 
+                    
+                    <li><a href="reviews.html">Пікірлер</a></li> 
+                    <li><a href="index.html#news">Жаңалықтар</a></li>
+                    <li><a href="index.html#stats">Нәтижелер</a></li>
+                    <li><a href="index.html#map">Карта</a></li>
+                    <li><a href="index.html#contact">Байланыс</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="user-account">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="register.html" id="userLoginTrigger">Қонақ</a>
+                    <a href="profile.html" id="profileLink" style="display:none;"></a>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="forum-container">
+        
+        <div class="forum-header">
+            <h2>Қауымдастық Тақырыптары</h2>
+            </div>
+
+        <div class="topic-list-header">
+            <span class="header-title">Тақырып Атауы</span>
+            <div class="header-stats">
+                <span class="stat-item"><i class="fas fa-comment-dots"></i> Пікірлер</span>
+                <span class="stat-item"><i class="fas fa-eye"></i> Қаралым</span>
+                <span class="stat-item date-stat"><i class="fas fa-user-circle"></i> Автор / Күні</span>
+            </div>
+        </div>
+        
+        <div id="topicList" class="forum-topic-list">
+            </div>
+
+    </div> <button id="createTopicBtn" class="floating-btn"><i class="fas fa-plus"></i> Жаңа Тақырып</button>
+
+    <div id="newTopicModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Жаңа Тақырып Құру</h3>
+            <form id="newTopicForm">
+                <input type="text" id="topicTitle" placeholder="Тақырып атауы" required>
+                <select id="topicCategory" required>
+                    <option value="">Санатты таңдаңыз</option>
+                    <option value="General">Жалпы</option>
+                    <option value="Technical">Техникалық</option>
+                    <option value="Volunteer">Еріктілерге арналған</option>
+                    <option value="Help Request">Көмек сұранысы</option>
+                </select>
+                <textarea id="topicContent" placeholder="Толық сипаттама..." rows="8" required></textarea>
+                <button type="submit" class="main-btn">Жіберу</button>
+                <p id="formTopicMessage" class="form-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HelpMap (NeoCare командасы). Барлық құқықтар қорғалған.</p>
+            <p>Байланыс: info@helpmap.kz</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементтерді анықтау
+            const newTopicModal = document.getElementById('newTopicModal');
+            const createTopicBtn = document.getElementById('createTopicBtn'); 
+            const closeBtn = document.querySelector('.close-btn');
+            const newTopicForm = document.getElementById('newTopicForm');
+            const formTopicMessage = document.getElementById('formTopicMessage');
+            const topicListElement = document.getElementById('topicList');
+
+            // Dark Mode және Қолданушы логикасы
+            const body = document.body;
+            const modeToggle = document.getElementById('modeToggle');
+            const userLoginTrigger = document.getElementById('userLoginTrigger'); 
+            const profileLink = document.getElementById('profileLink');
+            
+            const loggedInUser = localStorage.getItem('username');
+            const loggedInRole = localStorage.getItem('userRole'); 
+            
+            if (loggedInUser) {
+                userLoginTrigger.style.display = 'none';
+                profileLink.style.display = 'inline';
+                
+                let roleText = '';
+                if (loggedInRole === 'volunteer') {
+                    roleText = 'Ерікті';
+                } else if (loggedInRole === 'help') {
+                    roleText = 'Көмекке мұқтаж';
+                }
+                
+                profileLink.textContent = `${loggedInUser} (${roleText})`;
+            }
+
+            const currentMode = localStorage.getItem('mode') || 'light';
+            if (currentMode === 'dark') {
+                body.classList.add('dark-mode');
+                modeToggle.innerHTML = '<i class="fas fa-sun"></i> Жарық Режим';
+            } else {
+                modeToggle.innerHTML = '<i class="fas fa-moon"></i> Қараңғы Режим';
+            }
+
+            modeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                let mode = 'light';
+                if (body.classList.contains('dark-mode')) {
+                    mode = 'dark';
+                    modeToggle.innerHTML = '<i class="fas fa-sun"></i> Жарық Режим';
+                } else {
+                    modeToggle.innerHTML = '<i class="fas fa-moon"></i> Қараңғы Режим';
+                }
+                localStorage.setItem('mode', mode);
+            });
+            // =========================================
+
+            // =========================================
+            // ФОРУМНЫҢ ДИНАМИКАЛЫҚ ЛОГИКАСЫ
+            // =========================================
+            
+            // Жаңа дизайнға сәйкес тақырып карточкасын құру функциясы
+            function createTopicCard(topic) {
+                // Тақырып деректерінің үлгісі: id, title, category, commentsCount, views, author, created_at
+                const topicItem = document.createElement('a'); 
+                topicItem.href = `topic-detail.html?id=${topic.id}`; 
+                topicItem.className = 'forum-topic-item';
+                
+                const authorName = topic.author || 'Белгісіз'; 
+                const dateStr = topic.created_at ? new Date(topic.created_at).toLocaleDateString('kk-KZ') : 'Күні жоқ';
+
+                topicItem.innerHTML = `
+                    <div class="topic-details">
+                        <p class="topic-title">${topic.title}</p>
+                        <span class="topic-category">
+                            <i class="fas fa-tag"></i> 
+                            ${topic.category || 'Жалпы Сұрақ'}
+                        </span>
+                    </div>
+                    
+                    <div class="topic-stats">
+                        <div class="stat-item">
+                            <span class="stat-count">${topic.commentsCount || 0}</span>
+                            <span>Пікірлер</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count">${topic.views || 0}</span>
+                            <span>Қаралым</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count">${authorName}</span>
+                            <span>${dateStr}</span>
+                        </div>
+                    </div>
+                `;
+
+                return topicItem;
+            }
+
+            // Тақырыптарды жүктеу (Серверден деректерді алады)
+            async function fetchTopics() {
+                topicListElement.innerHTML = '<p class="loading-message">Тақырыптар жүктелуде...</p>';
+                try {
+                    // API-ге сұраныс
+                    const response = await fetch('http://localhost:5000/api/topics');
+                    
+                    if (!response.ok) {
+                        throw new Error('API жүктеу қатесі');
+                    }
+                    
+                    const data = await response.json();
+                    
+                    topicListElement.innerHTML = ''; 
+                    
+                    if (data.topics && data.topics.length > 0) {
+                        data.topics.forEach(topic => {
+                            topicListElement.appendChild(createTopicCard(topic));
+                        });
+                    } else {
+                        topicListElement.innerHTML = '<p class="no-topics-message">Форумда әлі тақырыптар жоқ. Бірінші болып құрыңыз!</p>';
+                    }
+
+                } catch (error) {
+                    console.error('Тақырыптарды жүктеу қатесі:', error);
+                    topicListElement.innerHTML = '<p class="error-message">Тақырыптарды жүктеу кезінде қателік орын алды. Серверді тексеріңіз.</p>';
+                }
+            }
+
+            // Модальды ашу/жабу логикасы
+            createTopicBtn.onclick = function() {
+                if (!loggedInUser) {
+                    alert('Тақырып құру үшін жүйеге кіруіңіз керек!');
+                    window.location.href = 'register.html';
+                    return;
+                }
+                newTopicModal.style.display = "block";
+                newTopicForm.reset(); 
+                formTopicMessage.textContent = ''; 
+            }
+
+            closeBtn.onclick = function() {
+                newTopicModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newTopicModal) {
+                    newTopicModal.style.display = "none";
+                }
+            }
+            
+            // Жаңа тақырыпты жіберу логикасы
+            newTopicForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const author = loggedInUser; 
+                if (!author) {
+                     formTopicMessage.style.color = 'red';
+                     formTopicMessage.textContent = 'Қате: Автор анықталмады. Қайта кіріңіз.';
+                     return;
+                }
+                
+                const newTopicData = {
+                    title: document.getElementById('topicTitle').value,
+                    category: document.getElementById('topicCategory').value,
+                    content: document.getElementById('topicContent').value,
+                    author: author,
+                };
+
+                formTopicMessage.textContent = 'Жіберілуде...';
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/topics', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newTopicData)
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        formTopicMessage.style.color = '#ffc107';
+                        formTopicMessage.textContent = 'Тақырып сәтті құрылды!';
+                        newTopicForm.reset();
+                        
+                        setTimeout(() => {
+                            newTopicModal.style.display = "none";
+                            fetchTopics(); // Жаңа тізімді жаңарту
+                        }, 1500);
+
+                    } else {
+                        formTopicMessage.style.color = 'red';
+                        formTopicMessage.textContent = 'Қате: Тақырыпты құру мүмкін болмады. ' + (data.error || 'Қате мәліметі жоқ.');
+                    }
+
+                } catch (error) {
+                    formTopicMessage.style.color = 'red';
+                    formTopicMessage.textContent = 'Жіберу қатесі: Серверге қосылу мүмкін болмады.';
+                }
+            });
+
+            // Бастапқы жүктеу
+            fetchTopics();
+        });
+    </script>
+
+</body>
+</html>

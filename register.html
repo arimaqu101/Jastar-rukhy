@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тіркелу | HelpMap</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script src="script.js" defer></script> 
+</head>
+<body>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <h1><a href="index.html">HelpMap</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">Жоба туралы</a></li>
+                    <li><a href="index.html#features">Мүмкіндіктер</a></li>
+                    <li><a href="forum.html">Форум</a></li> 
+                    <li><a href="reviews.html">Пікірлер</a></li> 
+                    <li><a href="index.html#news">Жаңалықтар</a></li>
+                    <li><a href="index.html#stats">Нәтижелер</a></li>
+                    <li><a href="index.html#map">Карта</a></li>
+                    <li class="active-nav"><a href="register.html">Тіркелу</a></li> 
+                    <li><a href="login.html">Кіру</a></li> 
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="user-account">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="login.html" id="userLoginTrigger">Қонақ</a>
+                    <a href="profile.html" id="profileLink" style="display:none;"></a>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="register-section section-padding">
+        
+        <div class="register-card animate-on-scroll"> 
+            
+            <h2><i class="fas fa-user-plus"></i> Тіркелу</h2>
+            <p>Жаңа аккаунт құру үшін барлық өрістерді толтырыңыз.</p>
+            <form id="registrationForm" class="auth-form register-form">
+                
+                <label for="username">Аты-жөні (немесе логин):</label>
+                <input type="text" id="username" placeholder="Аты-жөніңізді енгізіңіз" required>
+                
+                <label for="password">Құпия сөз (кемінде 6 таңба):</label>
+                <input type="password" id="password" placeholder="Құпия сөзді енгізіңіз" required>
+
+                <label>Рөліңізді таңдаңыз:</label>
+                <div class="role-selection">
+                    <label><input type="radio" name="role" value="volunteer" required> Ерікті</label>
+                    <label><input type="radio" name="role" value="help" required> Көмекке мұқтаж</label>
+                </div>
+
+                <button type="submit" class="main-btn submit-btn">Тіркелу</button>
+                <p id="registrationMessage" class="form-message"></p>
+                <p class="small-link">Аккаунтыңыз бар ма? <a href="login.html">Кіру</a></p>
+            </form>
+            
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HelpMap (NeoCare командасы). Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const registrationForm = document.getElementById('registrationForm');
+            const registrationMessage = document.getElementById('registrationMessage');
+
+            // Проверка: Если пользователь уже вошел, перенаправить на профиль
+            if (localStorage.getItem('username')) {
+                 setTimeout(() => {
+                    window.location.href = 'profile.html'; 
+                 }, 50);
+                 return;
+            }
+
+            // ЛОГИКА РЕГИСТРАЦИИ (/api/register)
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('username').value.trim();
+                    const password = document.getElementById('password').value;
+                    // Получаем значение выбранного radio-кнопки
+                    const role = document.querySelector('input[name="role"]:checked')?.value; 
+
+                    const cleanUsername = username.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '').trim();
+
+                    if (!cleanUsername || !role || password.length < 6) {
+                        registrationMessage.style.color = 'red';
+                        registrationMessage.textContent = 'Аты-жөніңізді, рөліңізді таңдаңыз және құпия сөз кемінде 6 таңбадан тұруы керек!';
+                        return;
+                    }
+
+                    const userData = {
+                        username: cleanUsername,
+                        password: password,
+                        role: role
+                    };
+
+                    registrationMessage.textContent = 'Тіркелуде...';
+                    registrationMessage.style.color = '#17a2b8'; 
+
+                    try {
+                        // Отправка данных на Flask-сервер
+                        const response = await fetch('http://localhost:5000/api/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(userData)
+                        });
+
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            // Успех: сохраняем данные в браузере
+                            localStorage.setItem('username', cleanUsername);
+                            localStorage.setItem('userRole', role);
+                            
+                            let roleKazakh = role === 'volunteer' ? 'Ерікті' : 'Көмекке мұқтаж';
+                            registrationMessage.style.color = '#ffc107'; 
+                            registrationMessage.textContent = `Сәтті! Қош келдіңіз, ${cleanUsername}! Сіз рөлін ${roleKazakh} ретінде таңдадыңыз. Басты бетке бағытталуда...`;
+                            
+                            setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+                            
+                        } else {
+                            // Ошибка от сервера (например, имя пользователя занято)
+                            registrationMessage.style.color = 'red';
+                            registrationMessage.textContent = 'Тіркеу қатесі: ' + (data.error || 'Мәліметсіз қате.');
+                        }
+                    } catch (error) {
+                        // Ошибка сети (сервер Flask не запущен)
+                        registrationMessage.style.color = 'red';
+                        registrationMessage.textContent = 'Жіберу қатесі: Серверге қосылу мүмкін болмады. (Flask іске қосылған ба?)';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

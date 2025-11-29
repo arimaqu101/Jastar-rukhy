@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Тақырып</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    </head>
+<body>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <h1><a href="index.html">HelpMap</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">Жоба туралы</a></li>
+                    <li><a href="index.html#features">Мүмкіндіктер</a></li>
+                    <li class="active-nav"><a href="forum.html">Форум</a></li> 
+                    <li><a href="reviews.html">Пікірлер</a></li> 
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="index.html#news">Жаңалықтар</a></li>
+                    <li><a href="index.html#stats">Нәтижелер</a></li>
+                    <li><a href="index.html#map">Карта</a></li>
+                    <li><a href="index.html#contact">Байланыс</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="user-account">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="register.html" id="userLoginTrigger">Қонақ</a>
+                    <a href="profile.html" id="profileLink" style="display:none;"></a>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-detail-container animate-on-scroll">
+        <div class="topic-header">
+            <h2 id="topicTitle">Тақырып Атауы</h2>
+            <div id="topicMeta" class="topic-meta-info">
+                <span><i class="fas fa-user"></i> Автор: <strong id="topicAuthor">...</strong></span> |
+                <span><i class="fas fa-tag"></i> Санат: <strong id="topicCategory">...</strong></span> |
+                <span><i class="fas fa-calendar-alt"></i> Жарияланған: <strong id="topicDate">...</strong></span>
+            </div>
+        </div>
+
+        <div id="topicContent" class="topic-content animate-on-scroll" style="transition-delay: 0.1s;">
+            <p>Тақырыптың толық мазмұны осында болады.</p>
+        </div>
+
+        <section class="comments-section">
+            <h3><i class="fas fa-reply-all"></i> Пікірлер (<span id="commentCount">0</span>)</h3>
+            <div id="commentsArea">
+                <div class="comment-item animate-on-scroll">
+                    <div class="comment-meta">
+                        <span class="comment-author"><i class="fas fa-user-tag"></i> Жандос С.</span>
+                        <span class="comment-date">2025-11-15 14:30</span>
+                    </div>
+                    <p class="comment-text">Өте жақсы тақырып! Бірақ AI сәйкестендірудің қалай жұмыс істейтіні туралы толығырақ ақпарат бере аласыз ба?</p>
+                </div>
+                
+                <div class="comment-item animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="comment-meta">
+                        <span class="comment-author"><i class="fas fa-user-tag"></i> Ерікті #45</span>
+                        <span class="comment-date">2025-11-15 15:00</span>
+                    </div>
+                    <p class="comment-text">Мен ерікті ретінде тіркелдім. Картада менің орналасқан жерім көріне ме?</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="comment-form-section">
+            <h4>Пікір Қалдыру:</h4>
+            <form id="commentForm">
+                <textarea id="commentText" placeholder="Пікіріңізді жазыңыз..." rows="4" required></textarea>
+                <button type="submit" class="main-btn submit-btn">Пікірді Жіберу</button>
+            </form>
+            <p id="commentMessage" class="form-message"></p>
+        </section>
+        
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HelpMap (NeoCare командасы). Барлық құқықтар қорғалған.</p>
+            <p>Байланыс: info@helpmap.kz</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... (0. Қолданушыны Жүктеу және 1. Dark Mode Логикасы script.js-тен жұмыс істейді) ...
+
+            const pageTitle = document.getElementById('pageTitle');
+            const topicTitleElement = document.getElementById('topicTitle');
+            const topicAuthor = document.getElementById('topicAuthor');
+            const topicCategory = document.getElementById('topicCategory');
+            const topicDate = document.getElementById('topicDate');
+            const topicContentElement = document.getElementById('topicContent');
+            const commentsArea = document.getElementById('commentsArea');
+            const commentCountElement = document.getElementById('commentCount');
+            const commentForm = document.getElementById('commentForm');
+            const commentMessage = document.getElementById('commentMessage');
+
+            const loggedInUser = localStorage.getItem('username');
+            
+            // 1. URL-ден Тақырып ID-ін алу
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicId = parseInt(urlParams.get('id')) || 1; // ID жоқ болса, 1-ші тақырыпты жүктеу
+
+            // 2. Демо-Деректер
+            const mockTopics = [
+                { id: 1, title: 'Алғашқы рет қалай ерікті болуға болады?', category: 'Еріктілер', author: 'Aidar K.', date: '2025-11-10', content: 'Сәлеметсіздер ме! Жаңадан ерікті болғым келеді, бірақ қайдан бастарымды білмеймін. Қандай қадамдар жасау керек? HelpMap-тың ішіндегі негізгі ережелер мен кеңестерді айтыңыздаршы. Алдын ала рахмет!', 
+                    comments: [
+                        { author: 'Жандос С.', text: 'Өте жақсы тақырып! Бірақ AI сәйкестендірудің қалай жұмыс істейтіні туралы толығырақ ақпарат бере аласыз ба?', date: '2025-11-15 14:30' },
+                        { author: 'Ерікті #45', text: 'Мен ерікті ретінде тіркелдім. Картада менің орналасқан жерім көріне ме?', date: '2025-11-15 15:00' },
+                    ] 
+                },
+                { id: 2, title: 'HelpMap мобилді қосымшасы қашан шығады?', category: 'Техникалық', author: 'Admin', date: '2025-11-05', content: 'Құрметті пайдаланушылар! Біз мобилді қосымшаны әзірлеуді бастадық. Сіздердің ұсыныстарыңыз болса, осы жерге жазуларыңызды сұраймыз.', comments: [] },
+                // ... басқа тақырыптар ...
+            ];
+            
+            // 3. Тақырыпты Жүктеу
+            function fetchTopicDetails() {
+                const topic = mockTopics.find(t => t.id === topicId) || mockTopics[0]; // Егер табылмаса, біріншісін көрсету
+                
+                // Тақырып деректерін көрсету
+                pageTitle.textContent = topic.title;
+                topicTitleElement.textContent = topic.title;
+                topicAuthor.textContent = topic.author;
+                topicCategory.textContent = topic.category;
+                topicDate.textContent = topic.date;
+                topicContentElement.querySelector('p').textContent = topic.content;
+                
+                // Пікірлерді көрсету
+                renderComments(topic.comments);
+            }
+            
+            // 4. Пікірлерді Рендерлеу
+            function renderComments(comments) {
+                commentsArea.innerHTML = '';
+                commentCountElement.textContent = comments.length;
+                
+                comments.forEach((comment, index) => {
+                    const commentItem = document.createElement('div');
+                    commentItem.classList.add('comment-item', 'animate-on-scroll');
+                    
+                    // Кідіріс қосу
+                    commentItem.style.transitionDelay = `${index * 0.1}s`;
+
+                    commentItem.innerHTML = `
+                        <div class="comment-meta">
+                            <span class="comment-author"><i class="fas fa-user-tag"></i> ${comment.author}</span>
+                            <span class="comment-date">${comment.date}</span>
+                        </div>
+                        <p class="comment-text">${comment.text}</p>
+                    `;
+                    commentsArea.appendChild(commentItem);
+                });
+            }
+
+            // 5. Пікір Қосу Логикасы
+            if (commentForm) {
+                commentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (!loggedInUser) {
+                         commentMessage.style.color = 'red';
+                         commentMessage.textContent = 'Пікір қалдыру үшін жүйеге кіруіңіз керек!';
+                         return;
+                    }
+
+                    const commentText = document.getElementById('commentText').value.trim();
+                    
+                    if (!commentText) {
+                        commentMessage.style.color = 'red';
+                        commentMessage.textContent = 'Пікір мәтіні бос болмауы керек!';
+                        return;
+                    }
+
+                    const topic = mockTopics.find(t => t.id === topicId);
+                    
+                    if (topic) {
+                        const newComment = {
+                            author: loggedInUser,
+                            text: commentText,
+                            date: new Date().toLocaleDateString('kk-KZ') + ' ' + new Date().toLocaleTimeString('kk-KZ', { hour: '2-digit', minute: '2-digit' })
+                        };
+                        
+                        // Жаңа пікірді қосу
+                        topic.comments.push(newComment);
+                        
+                        commentMessage.style.color = '#ffc107';
+                        commentMessage.textContent = 'Пікір сәтті қосылды! (Демо-режим)';
+                        commentForm.reset();
+                        
+                        // Пікірлерді қайта рендерлеу
+                        renderComments(topic.comments);
+
+                    } else {
+                        commentMessage.style.color = 'red';
+                        commentMessage.textContent = 'Қате: Тақырып табылмады.';
+                    }
+
+                });
+            }
+
+            fetchTopicDetails();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Волонтер Рейтингі және Пікірлер | HelpMap</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    </head>
+<body>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <h1><a href="index.html">HelpMap</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">Жоба туралы</a></li>
+                    <li><a href="index.html#features">Мүмкіндіктер</a></li>
+                    <li><a href="forum.html">Форум</a></li> 
+                    <li class="active-nav"><a href="reviews.html">Пікірлер</a></li> 
+                    <li><a href="index.html#news">Жаңалықтар</a></li>
+                    <li><a href="index.html#stats">Нәтижелер</a></li>
+                    <li><a href="index.html#map">Карта</a></li>
+                    <li><a href="index.html#contact">Байланыс</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="user-account">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="register.html" id="userLoginTrigger">Қонақ</a>
+                    <a href="profile.html" id="profileLink" style="display:none;"></a>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="reviews-container animate-on-scroll"> 
+        <h2><i class="fas fa-star"></i> Волонтер Рейтингі және Пікірлер</h2>
+        
+        <section id="leaveReview" class="review-form-section animate-on-scroll">
+            <h3>Пікір Қалдыру</h3>
+            <form id="reviewForm"> 
+                
+                <label for="volunteerName">Волонтердің аты-жөні немесе ID:</label>
+                <input type="text" id="volunteerName" placeholder="Волонтерді көрсетіңіз" required>
+
+                <label>Рейтинг (5 жұлдызды):</label>
+                <div class="rating-stars" id="ratingStars">
+                    <i class="fas fa-star star" data-rating="1"></i>
+                    <i class="fas fa-star star" data-rating="2"></i>
+                    <i class="fas fa-star star" data-rating="3"></i>
+                    <i class="fas fa-star star" data-rating="4"></i>
+                    <i class="fas fa-star star" data-rating="5"></i>
+                </div>
+                
+                <label for="reviewText">Пікіріңіз:</label>
+                <textarea id="reviewText" placeholder="Пікіріңізді жазыңыз..." rows="4" required></textarea>
+                
+                <button type="submit" class="main-btn submit-btn">Пікірді жіберу</button>
+            </form>
+            <p id="reviewMessage" class="form-message"></p>
+        </section>
+
+        <section id="reviewList" class="review-list-section">
+            <h3>Соңғы Пікірлер</h3>
+            <div id="reviewsArea">
+                
+                <div class="review-item animate-on-scroll">
+                    <div class="review-meta">
+                        <span class="reviewer-info">Әлия С. (Көмек Алушы) - Волонтер ID: 101</span>
+                        <span class="date">2025-11-15</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                    </div>
+                    <p class="review-text">Волонтер 101 өте жауапты және мейірімді. Көмегі дер кезінде жетті. Үлкен рахмет!</p>
+                </div>
+
+                <div class="review-item animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="review-meta">
+                        <span class="reviewer-info">Мұрат Қ. (Көмек Алушы) - Волонтер Аты: Азамат</span>
+                        <span class="date">2025-11-14</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">Кішкене кешіккені болмаса, жұмысын өте жақсы атқарды. 4/5 жұлдыз лайық.</p>
+                </div>
+                
+                <div class="review-item animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="review-meta">
+                        <span class="reviewer-info">Жанна Е. (Көмек Алушы) - Волонтер ID: 105</span>
+                        <span class="date">2025-11-12</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                        <i class="fas fa-star selected"></i>
+                    </div>
+                    <p class="review-text">HelpMap арқылы өте жылдам көмек алдым. Ұйымдастырушыларға алғыс!</p>
+                </div>
+                
+                </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HelpMap (NeoCare командасы). Барлық құқықтар қорғалған.</p>
+            <p>Байланыс: info@helpmap.kz</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... (0. Қолданушыны Жүктеу және 1. Dark Mode Логикасы script.js-тен жұмыс істейді) ...
+
+            const reviewForm = document.getElementById('reviewForm');
+            const ratingStars = document.getElementById('ratingStars');
+            const reviewMessage = document.getElementById('reviewMessage');
+            
+            let currentRating = 0;
+
+            // Жұлдызшаларды жаңарту функциясы
+            function updateStars(rating) {
+                const stars = ratingStars.querySelectorAll('.star');
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.classList.add('selected');
+                    } else {
+                        star.classList.remove('selected');
+                    }
+                });
+            }
+
+            // Жұлдызшаларға оқиға тыңдаушыларды қосу (Рейтинг таңдау)
+            if (ratingStars) {
+                ratingStars.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'I') {
+                        currentRating = parseInt(e.target.getAttribute('data-rating'));
+                        updateStars(currentRating);
+                    }
+                });
+            }
+
+            // Пікір формасын жіберу
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const loggedInUser = localStorage.getItem('username');
+                    
+                    if (!loggedInUser) {
+                         reviewMessage.style.color = 'red';
+                         reviewMessage.textContent = 'Пікір қалдыру үшін жүйеге кіруіңіз керек!';
+                         return;
+                    }
+
+                    const volunteerName = document.getElementById('volunteerName').value.trim();
+                    const reviewText = document.getElementById('reviewText').value.trim();
+                    
+                    if (currentRating === 0) {
+                        reviewMessage.style.color = 'red';
+                        reviewMessage.textContent = 'Жұлдызшалар арқылы рейтинг таңдаңыз.';
+                        return;
+                    }
+                    
+                    // Создаем объект отзыва (для демонстрации)
+                    const newReview = {
+                        volunteer: volunteerName,
+                        reviewer: loggedInUser,
+                        rating: currentRating,
+                        text: reviewText,
+                        date: new Date().toLocaleDateString('kk-KZ')
+                    };
+                    
+                    // ВРЕМЕННО: Логика отправки на бэкенд не реализована, показываем сообщение об успехе.
+                    console.log('Отправка отзыва:', newReview);
+                    
+                    reviewMessage.style.color = '#ffc107'; 
+                    reviewMessage.textContent = `Рахмет, ${loggedInUser}! Сіздің пікіріңіз (Рейтинг: ${currentRating}) волонтер ${volunteerName} жіберілді. (Бұл демо-режим)`;
+                    
+                    // Очистка формы
+                    reviewForm.reset();
+                    currentRating = 0;
+                    updateStars(0);
+                    document.getElementById('volunteerName').value = ''; 
+                    document.getElementById('reviewText').value = '';
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
